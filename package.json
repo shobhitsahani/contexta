@@ -1,0 +1,28 @@
+{
+  "name": "contexta",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.30.3",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "pnpm --filter @contexta/shared build && pnpm --filter @contexta/api build",
+    "typecheck": "pnpm --filter @contexta/shared typecheck && pnpm --filter @contexta/api typecheck",
+    "lint": "eslint .",
+    "test": "pnpm --filter @contexta/api test",
+    "db:generate": "pnpm --filter @contexta/api db:generate",
+    "db:migrate": "pnpm --filter @contexta/api db:migrate"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.0",
+    "@vitest/coverage-v8": "^5.1.1",
+    "eslint": "^10.15.0",
+    "globals": "^17.14.0",
+    "jsdom": "^31.0.1",
+    "typescript": "5.9.3",
+    "typescript-eslint": "^8.73.0",
+    "vitest": "^5.1.1"
+  }
+}

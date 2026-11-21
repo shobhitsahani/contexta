@@ -1,0 +1,7 @@
+Installation: create a .env file from .env.example, start Postgres with pgvector and Redis, then run the API and web app. The health endpoint returns ok when the API is running.
+
+Configuration: set BETTER_AUTH_SECRET, KEY_ENCRYPTION_SECRET, DATABASE_URL, and WEB_ORIGIN. Optional Google OAuth requires both client id and secret.
+
+Troubleshooting: if uploads fail with unsupported type, check the file extension and MIME type. Scanned PDFs are not supported. If retrieval returns no sources, verify the document status is ready and that the chat includes the document.
+
+Performance: ingestion runs in the background. Large documents may take time to parse, chunk, and embed. The UI polls document status every two seconds.

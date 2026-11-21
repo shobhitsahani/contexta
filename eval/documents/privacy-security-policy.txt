@@ -1,0 +1,47 @@
+=== PAGE 1 ===
+Contexta Privacy Policy and Security Architecture: Data Classification and Storage
+
+Contexta is engineered from the ground up with data isolation and strict privacy governance. This policy establishes the procedures and cryptographic controls governing the ingestion, storage, processing, and purging of user-uploaded data, vectors, provider keys, and interaction histories.
+
+Data Classification and Storage Tiers:
+1. Account Metadata: User email addresses, account status, privacy consent timestamps, and policy version numbers are stored in relational PostgreSQL tables.
+2. Original Documents: Uploaded document binaries (PDF, DOCX, TXT) are transferred directly into secure private object storage (Cloudflare R2 or Supabase Storage). Object keys are randomly generated UUIDs with no public read permissions.
+3. Extracted Chunks and Embeddings: Parsed text chunks, structural metadata (page offsets, chunk indices), and 768-dimensional vector embeddings are stored in a dedicated Postgres database using the pgvector extension.
+4. Provider Credentials: User-provided LLM API keys (BYOK) are encrypted at rest using authenticated symmetric AES-256-GCM. Plaintext keys are never written to disk, never printed in application logs, and never returned over HTTP API responses.
+
+=== PAGE 2 ===
+Data Retention Lifecycles and Account Purge Protocols
+
+Contexta enforces a strict user-centric retention lifecycle:
+- Active Retention: Uploaded files, chunk embeddings, chat sessions, and message transcripts remain stored while the owning user maintains an active Contexta account.
+- User-Initiated Document Deletion: When a user deletes a document via the API or web interface, the system initiates a cascading delete transaction:
+  1. The document record in the relational store is marked for deletion.
+  2. All associated chunks and vector embeddings in pgvector are purged immediately via foreign key cascade (`ON DELETE CASCADE`).
+  3. Stored document summary records are removed.
+  4. The backing binary object in object storage is deleted asynchronously.
+  5. Historic chat messages referencing the deleted document retain their text transcript, but citation source links are permanently flagged as "document deleted".
+- Account Termination: Upon complete account deletion, all user records, documents, chunk vectors, provider keys, and chat sessions are irreversibly deleted from production storage within 60 seconds. Contexta does not maintain soft-deleted shadow copies.
+
+=== PAGE 3 ===
+Bring Your Own Key (BYOK) Governance and Third-Party AI Providers
+
+Contexta provides a dual-mode operational architecture distinguishing between the platform's free tier and Bring Your Own Key (BYOK) usage:
+
+Free Tier Data Handling:
+On the platform free tier, chat requests and document embeddings are processed using platform-managed API keys connecting to Google's Gemini Flash and Gemini Embedding models. Under Google's free-tier terms of service, submitted prompt content and retrieved chunks may be processed and reviewed to improve model algorithms. Users are explicitly cautioned not to upload confidential, regulated, or proprietary data under the free tier.
+
+BYOK (Bring Your Own Key) Data Handling:
+When a user configures their personal provider key (e.g., Anthropic Claude, OpenAI GPT, or paid Gemini API keys):
+1. Ingestion embeddings continue using the platform's standardized 768-dimension embedding model to preserve vector index consistency.
+2. Generation requests are routed directly to the selected provider using the user's decrypted credentials.
+3. The provider's commercial enterprise terms govern data processing. For commercial API tiers, providers generally do not train foundation models on API inputs.
+4. Provider keys are decrypted strictly in volatile application memory for the duration of the outbound HTTPS request.
+
+=== PAGE 4 ===
+User Consent, Privacy Rights, and Regulatory Disclosures
+
+Contexta complies with modern international privacy standards regarding algorithmic transparency and data subject consent:
+- Mandatory Pre-Upload Consent: Prior to initiating their first file upload, every user must record affirmative consent acknowledging that document content will undergo semantic text extraction and embedding generation. The consent event records `privacy_consent_at` timestamp and `privacy_version` in the database.
+- Consent Revocation: A user may revoke their privacy consent at any point in account settings. Revocation instantly blocks subsequent document uploads and freezes free-tier AI chat generation until re-consent is granted.
+- Zero Ad Targeting: Contexta does not monetize user content, does not sell behavioral analytics, and does not permit third-party advertising trackers in the application.
+- Security Incident Response: In the unlikely event of an unauthorized access incident affecting encrypted credentials or document repositories, registered users will receive electronic notification within 72 hours of incident verification.

@@ -1,0 +1,78 @@
+{
+  "ml-primer": {
+    "docId": "ml-primer",
+    "title": "Foundations of Machine Learning and Statistical Learning Theory",
+    "requiredFacts": [
+      "Machine learning focuses on algorithms that iteratively improve performance through empirical data",
+      "Statistical learning minimizes empirical risk because true joint probability is unknown",
+      "Parametric models have a fixed parameter capacity while non-parametric models scale with data volume",
+      "Supervised learning uses labeled pairs while unsupervised learning operates without target labels",
+      "Deep neural networks use multiple hidden layers and non-linear activation functions",
+      "Overfitting occurs when a model memorizes noise instead of generalizable patterns",
+      "Mitigation techniques include L1/L2 regularization, dropout, early stopping, and cross-validation",
+      "Retrieval-Augmented Generation combines semantic vector retrieval with generative language models"
+    ],
+    "forbiddenFacts": [
+      "Machine learning models always guarantee zero error on training data",
+      "Contexta requires Quantum Computers to train neural networks",
+      "Supervised learning never requires ground-truth target labels"
+    ]
+  },
+  "privacy-security-policy": {
+    "docId": "privacy-security-policy",
+    "title": "Contexta Privacy Policy and Security Architecture",
+    "requiredFacts": [
+      "Contexta stores original documents in private object storage using UUID keys",
+      "Chunks and 768-dimensional embeddings are stored in PostgreSQL using pgvector",
+      "User-provided LLM API keys are encrypted at rest using AES-256-GCM",
+      "Plaintext keys are never written to disk or logged",
+      "Document deletion initiates a cascading delete of all chunks, embeddings, and summaries",
+      "Account termination permanently purges all user data within 60 seconds without shadow copies",
+      "Under the free tier, submitted content may be processed by Google to improve its models",
+      "Users can revoke privacy consent at any time, which blocks further uploads"
+    ],
+    "forbiddenFacts": [
+      "Contexta sells user data and prompts to third-party advertising networks",
+      "BYOK keys are stored in unencrypted plaintext inside relational tables",
+      "Deleted documents are permanently archived in public repositories"
+    ]
+  },
+  "operations-manual": {
+    "docId": "operations-manual",
+    "title": "Contexta Operations and Reliability Runbook",
+    "requiredFacts": [
+      "Next.js frontend runs on Vercel and Express API runs on Render free instances",
+      "Render free tier sleeps after 15 minutes of inactivity resulting in 30-50 second cold starts",
+      "All services validate environment variables at startup using Zod schemas",
+      "KEY_ENCRYPTION_SECRET must be 32 bytes encoded in 64 hex or 44 base64 characters",
+      "Jobs table coordinates background ingestion using SELECT FOR UPDATE SKIP LOCKED",
+      "Transient errors retry with exponential backoff up to maximum attempts",
+      "Fatal errors like scanned PDFs fail immediately without wasting retries",
+      "Watchdog reclaims stale processing jobs abandoned for over 5 minutes"
+    ],
+    "forbiddenFacts": [
+      "Contexta uses Kubernetes clusters with auto-scaling GPUs on AWS",
+      "The health check endpoint returns 404 when database is operational",
+      "Stale jobs are permanently deleted after 10 seconds of inactivity"
+    ]
+  },
+  "product-specification": {
+    "docId": "product-specification",
+    "title": "Contexta Product and Engineering Specification",
+    "requiredFacts": [
+      "Verified users receive a baseline free allowance of 50,000 tokens",
+      "Supported file formats are PDF, DOCX, and plain text TXT",
+      "Maximum file size is 10 Megabytes and maximum page count is 100 pages",
+      "Scanned PDFs with fewer than 50 characters across 5+ pages are rejected with an OCR required message",
+      "Chunks are sized to approximately 600 tokens with 80 token overlap",
+      "Retrieval uses gemini-embedding-001 at 768 dimensions with HNSW indexing",
+      "Hybrid search combines vector search and full-text keyword search via Reciprocal Rank Fusion",
+      "Chat responses stream via SSE with delta, sources, usage, and done events"
+    ],
+    "forbiddenFacts": [
+      "Contexta supports video, audio, and executable binary uploads in v1",
+      "Free-tier users are granted unlimited tokens with no daily server cap",
+      "Retrieval requires sending the entire 100-page document to the LLM on every turn"
+    ]
+  }
+}

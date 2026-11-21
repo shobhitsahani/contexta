@@ -1,0 +1,64 @@
+=== PAGE 1 ===
+Contexta Operations and Reliability Runbook: Architecture and Deployment
+
+This runbook outlines operational procedures, configuration requirements, scaling policies, and recovery mechanisms for running Contexta services in staging and production environments.
+
+System Topology:
+- Frontend Tier: Next.js (App Router) deployed as a static/edge-rendered application on Vercel with responsive mobile and desktop support.
+- Backend API Service: Node.js Express application running TypeScript in ECMAScript Modules (ESM) mode, hosted as an HTTP web service on Render.
+- Persistence Layer: PostgreSQL with the pgvector extension enabled (hosted on Supabase or Neon free tiers).
+- Cache & Rate Limiter: Upstash Redis providing distributed in-memory sliding-window rate limiting for authentication and upload endpoints.
+- Asynchronous Job Processing: PostgreSQL-backed transactional job queue leveraging `SELECT ... FOR UPDATE SKIP LOCKED` inside the API process.
+
+Process Isolation and Cold-Start Mitigation:
+On Render free instances, the API process enters sleep mode after 15 minutes of inbound inactivity. A cold start requires 30 to 50 seconds to resume listening. The web client implements an exponential backoff ping mechanism and renders a "Waking up the server..." visual indicator until `/health` returns HTTP 200.
+
+=== PAGE 2 ===
+Environment Variables, Secret Management, and Database Configuration
+
+All services require strict environment variable validation at startup using Zod schemas (`src/config/env.ts`). If any required variable is missing or malformed, the application terminates immediately with a non-zero exit code.
+
+Core Variable Specifications:
+- `PORT`: HTTP port for Express server (default: 3001).
+- `DATABASE_URL`: Connection URI for PostgreSQL with SSL enabled.
+- `KEY_ENCRYPTION_SECRET`: A 32-byte cryptographic master key encoded as 64 hexadecimal characters or 44 base64 characters. Never commit default values.
+- `BETTER_AUTH_SECRET`: Symmetric secret used by Better Auth for signing and verifying session cookies.
+- `WEB_ORIGIN`: Allowed CORS origin for the Next.js web application (e.g., https://contexta.vercel.app).
+- `UPSTASH_REDIS_REST_URL` & `UPSTASH_REDIS_REST_TOKEN`: Credentials for Redis sliding-window rate limiters.
+- `GEMINI_API_KEY`: Server-side API key for free-tier embeddings (gemini-embedding-001) and free-tier chat (Gemini Flash).
+
+Database Migration Execution:
+Execute schema migrations prior to deploying new application code:
+`pnpm --filter @contexta/api db:migrate`
+Production database connections must use connection pooling (e.g., Neon connection pooler or PgBouncer) to prevent connection exhaustion.
+
+=== PAGE 3 ===
+Queue Management, Stale Lock Reclaim, and Ingestion Worker Recovery
+
+Background document ingestion is coordinated through the `jobs` database table:
+- Enqueue: Document uploads insert a job row with `status = 'queued'`, `attempts = 0`, and `run_at = NOW()`.
+- Claiming: Workers claim ready jobs atomically using:
+  `SELECT id, document_id FROM jobs WHERE status = 'queued' AND run_at <= NOW() ORDER BY run_at ASC LIMIT 1 FOR UPDATE SKIP LOCKED;`
+- Execution: Claimed jobs transition to `status = 'processing'`, recording `locked_at = NOW()`.
+- Transient Errors: If network errors or provider 429 rate limits occur during ingestion, `attempts` increments. The job re-queues with exponential backoff: `run_at = NOW() + (2 ^ attempts * 10 seconds)`.
+- Fatal Errors: Scanned PDFs, corrupted archives, or invalid file payloads immediately transition to `status = 'failed'` without burning retry attempts.
+- Stale Job Recovery: If the hosting instance is restarted or goes to sleep while processing a job, the job becomes abandoned. An automated watchdog queries for jobs in `processing` status where `locked_at < NOW() - INTERVAL '5 minutes'`. The watchdog reclaims the job to `status = 'queued'` and resets `locked_at`. Ingestion pipelines are idempotent and resume embedding from the last committed chunk index.
+
+=== PAGE 4 ===
+Health Verification, Monitoring, and Diagnostic Procedures
+
+Health Check Endpoint:
+A stateless probe is exposed at `GET /health`. It validates database connectivity and Redis availability:
+- HTTP 200 `{"status": "ok", "timestamp": "..."}`: All services operational.
+- HTTP 503 `{"status": "degraded", "error": "..."}`: Persistence or cache unreachable.
+
+Common Incident Runbooks:
+1. Incident: Document Ingestion Stuck in "Parsing"
+   - Check API server logs for Out Of Memory (OOM) killer events. Parsing 100-page complex PDFs in Node.js can spike memory above the 512 MB host limit.
+   - Diagnostic Command: Inspect `jobs` table for high attempt counts or unhandled exceptions in `last_error`.
+   - Resolution: Restart worker and ensure file complies with the 10 MB and 100-page limits.
+2. Incident: HTTP 429 Rate Limits from Gemini Embedding API
+   - Cause: Ingesting multiple large documents simultaneously exceeds the 30,000 tokens/min free quota.
+   - Resolution: The ingestion embedder incorporates automatic exponential backoff with jitter up to 5 retries. Lower concurrency or stagger upload queues.
+3. Incident: Token Reservation Mismatch
+   - Check `usage` table for user account. Verify that `free_tokens_used` does not exceed `free_tokens_cap`. Atomic transactions prevent double spending.

@@ -1,0 +1,43 @@
+=== PAGE 1 ===
+Foundations of Machine Learning and Statistical Learning Theory
+
+Machine learning is a subfield of artificial intelligence focused on mathematical algorithms that iteratively improve performance on specific tasks through empirical data observation. Rather than executing hard-coded rule engines, a machine learning model identifies statistical regularities, correlations, and representations across training datasets to generalize effectively to unseen inputs.
+
+The fundamental objective of statistical learning theory is minimizing the expected risk over the data distribution. Because the true joint probability distribution is unknown, learning algorithms minimize empirical risk across observed training samples. Inductive bias represents the set of underlying assumptions a model employs to predict outputs for novel inputs outside the training distribution.
+
+Parametric models assume a finite, fixed set of parameters independent of training sample size, such as linear regression and logistic regression. Non-parametric models allow parameter capacity to scale flexibly with data volume, exemplified by k-nearest neighbors and decision trees.
+
+=== PAGE 2 ===
+Supervised Architectures, Neural Networks and Deep Learning
+
+Supervised learning requires paired training instances consisting of input features and ground-truth target labels. Regression tasks predict continuous numerical quantities using algorithms like ordinary least squares, ridge regression, and support vector regression. Classification tasks predict discrete categorical labels using logistic regression, random forests, and gradient boosting machines.
+
+Unsupervised learning operates without target labels to discover latent organizational structures within data. Core methodologies include k-means clustering, hierarchical clustering, principal component analysis (PCA), and t-distributed stochastic neighbor embedding (t-SNE).
+
+Artificial neural networks consist of sequential layers of interconnected mathematical processing units termed nodes or neurons. Each connection possesses a real-valued scalar weight that modulates signal transmission. Deep neural networks incorporate multiple hidden layers between input and output layers, facilitating automatic extraction of hierarchical feature representations. Activation functions such as ReLU (Rectified Linear Unit), GELU, and sigmoid introduce non-linearities necessary to approximate complex functions.
+
+=== PAGE 3 ===
+Optimization Dynamics, Loss Functions, and Overfitting Mitigation
+
+Training deep neural architectures involves defining an objective loss function that quantifies the divergence between model predictions and ground-truth values. Common loss formulations include mean squared error (MSE) for regression and categorical cross-entropy for classification. Optimization algorithms, predominantly stochastic gradient descent (SGD) and adaptive variants like Adam and AdamW, update model weights by propagating gradients backward through layers via the backpropagation algorithm.
+
+A central obstacle in statistical modeling is overfitting, wherein a model memorizes stochastic noise and idiosyncrasies of training samples rather than underlying generative patterns. An overfitted model exhibits low empirical training loss alongside poor generalization error on validation data.
+
+Mitigation strategies for overfitting include:
+1. L1 and L2 weight regularization (penalizing model parameter magnitudes).
+2. Dropout (stochastically disabling a fraction of neuron activations during forward passes).
+3. Early stopping (terminating iterative training when validation loss begins to diverge).
+4. Data augmentation (synthesizing additional training variations).
+5. K-fold cross-validation for hyperparameter tuning.
+
+=== PAGE 4 ===
+Model Evaluation Metrics and Retrieval-Augmented Generation (RAG)
+
+Quantitative assessment of model performance requires robust evaluation metrics aligned with domain objectives. Classification models are evaluated via confusion matrices mapping true positives, false positives, true negatives, and false negatives. Derived metrics include:
+- Accuracy: proportion of correct predictions across all classes.
+- Precision: ratio of true positive predictions to total predicted positives.
+- Recall (Sensitivity): ratio of true positive predictions to all actual positive instances.
+- F1-Score: the harmonic mean of precision and recall, balancing trade-offs in imbalanced distributions.
+- ROC-AUC: area under the receiver operating characteristic curve assessing discriminative capability.
+
+Retrieval-Augmented Generation (RAG) combines dense semantic vector retrieval with generative language models. Instead of relying solely on parametric memory stored in weights, RAG retrieves external contextual passages relevant to a user query and injects them into the prompt context window. This architecture dramatically reduces hallucination, enables real-time citation grounding, and allows dynamic knowledge base updates without costly model retraining.

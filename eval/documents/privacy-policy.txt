@@ -1,0 +1,9 @@
+Contexta stores uploaded documents, extracted chunks, and chat history for the account owner. Documents are processed to create embeddings used for retrieval.
+
+Data retention: uploaded files and derived data are retained until the user deletes them or closes the account. Account deletion removes files, chunks, vectors, keys, and chats.
+
+Privacy consent is required before the first upload. The consent records a timestamp and policy version. Users may withdraw consent, which blocks further uploads.
+
+Byok chat sends questions and retrieved chunks to the provider selected by the user, using the user's own API key. The provider's terms apply.
+
+The free tier uses a server key. On the free plan, the embedding and chat provider may use submitted content to improve its products. Sensitive files should not be uploaded to the free tier.

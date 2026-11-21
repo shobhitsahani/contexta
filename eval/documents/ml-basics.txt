@@ -1,0 +1,9 @@
+Machine learning is a subset of artificial intelligence that focuses on algorithms which improve through experience. A model learns patterns from training data and generalizes to new inputs.
+
+Supervised learning uses labeled examples. Common algorithms include linear regression, logistic regression, decision trees, and neural networks. Unsupervised learning discovers structure in unlabeled data, such as clustering and dimensionality reduction.
+
+Neural networks consist of layers of interconnected nodes. Each connection has a weight that is adjusted during training. Deep learning uses many hidden layers to learn hierarchical representations.
+
+Training requires a loss function and an optimizer. Overfitting occurs when a model memorizes training data and fails to generalize. Regularization, dropout, and cross-validation help prevent overfitting.
+
+Evaluation metrics include accuracy, precision, recall, and F1 score. A confusion matrix summarizes classification performance. Retrieval-augmented generation combines a retriever with a language model to ground answers in documents.

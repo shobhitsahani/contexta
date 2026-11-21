@@ -1,0 +1,69 @@
+=== PAGE 1 ===
+Contexta Product and Engineering Specification: Functional Architecture and Quotas
+
+Contexta is an intelligent context-aware knowledge assistant that transforms unstructured user documents into precise, cited conversational answers. This document specifies platform capabilities, technical quotas, API endpoints, and streaming message contracts for the v1 release.
+
+Target Audience and User Persona:
+Contexta is engineered for knowledge workers, developers, researchers, and students who require immediate grounded synthesis over technical manuals, legal agreements, research publications, and corporate policies without vendor lock-in or recurring SaaS subscription costs.
+
+Free Tier Quotas and Allowances:
+- Free Token Budget: Each verified user account receives a baseline allowance of 50,000 free tokens (covering approximately 10 comprehensive Q&A turns with 8 retrieved source chunks).
+- Model Allocation: The free tier utilizes Google Gemini Flash for answer generation and gemini-embedding-001 (dimension 768) for dense vector search.
+- Global Server Cap: Contexta enforces a platform-wide daily token ceiling on the free Gemini key. If the platform cap is reached, free questions pause with a friendly notification, while BYOK users remain unaffected.
+- BYOK (Bring Your Own Key): After consuming the free allowance, or at any time by preference, users can supply API keys for Gemini, OpenAI, or Anthropic. BYOK usage consumes zero free tokens.
+
+=== PAGE 2 ===
+Document Ingestion Specifications, Size Caps, and File Formats
+
+Supported File Types in v1:
+1. Portable Document Format (PDF): Extracted via `pdf-parse` / `pdfjs-dist` preserving page-level pagination.
+2. Microsoft Word (DOCX): Processed via `mammoth` into clean structural text and headings.
+3. Plain Text (TXT): Ingested with UTF-8 character encoding.
+
+Ingestion Thresholds and Rejection Criteria:
+- Maximum File Size: 10 Megabytes (10,485,760 bytes). Uploads exceeding this threshold are rejected at the edge with HTTP 413 `FILE_TOO_LARGE`.
+- Maximum Page Count: 100 pages per document. Exceeding documents fail ingestion with `INVALID_DOCUMENT`.
+- Maximum User Storage: 5 active documents per free-tier user account.
+- Scanned PDF Handling: Documents that produce fewer than 50 extracted characters across 5 or more pages are classified as non-text scanned PDFs. Ingestion terminates immediately with status `failed` and message "Scanned PDF not supported yet (requires OCR)".
+
+Chunking Parameters:
+- Target Chunk Size: ~600 tokens (~2,400 characters).
+- Overlap Size: ~80 tokens (~320 characters).
+- Chunking Strategy: Heading-aware and paragraph-aware block grouping with sentence-boundary overlap preservation.
+
+=== PAGE 3 ===
+Retrieval Mechanics, Vector Indexing, and Reciprocal Rank Fusion (RRF)
+
+Dense Semantic Vector Search:
+- Embedding Model: gemini-embedding-001 producing 768-dimensional floating point vectors.
+- Similarity Metric: Cosine distance (`<=>` operator in pgvector).
+- Index Type: Hierarchical Navigable Small World (HNSW) index with `m = 16` and `ef_construction = 64`.
+- Retrieval Depth: Top-k = 8 candidate chunks.
+- Minimum Vector Score Threshold: Vector similarity scores below 0.35 are discarded.
+
+Postgres Full-Text Keyword Search (FTS):
+- In parallel with vector search, the query text is searched against a PostgreSQL `tsvector` generated from chunk content using standard English text search dictionaries (`english`).
+- GIN indexes accelerate lexical matching for exact technical keywords, proper nouns, and numerical codes.
+
+Reciprocal Rank Fusion (Hybrid Search):
+To achieve state-of-the-art retrieval accuracy across mixed vocabularies, Contexta implements Reciprocal Rank Fusion (RRF):
+`RRF_Score(doc) = (1 / (60 + Rank_Vector)) + (1 / (60 + Rank_Keyword))`
+Chunks appearing in both vector and keyword rankings receive compound scores, ensuring domain-specific terminology is never lost while maintaining conceptual relevance.
+
+=== PAGE 4 ===
+Server-Sent Events (SSE) Streaming Protocol and Citation Mechanics
+
+Interactive chat answers are streamed to the client via Server-Sent Events (SSE) from `POST /chats/:id/messages`.
+
+Protocol Event Sequence:
+1. `event: delta`: Incremental token fragments emitted as the LLM generates words: `data: {"text": "According to..."}`.
+2. `event: sources`: Sent immediately following text completion, providing an array of verified source citations:
+   `data: {"sources": [{"n": 1, "documentId": "uuid", "fileName": "manual.pdf", "page": 3, "snippet": "..."}]}`.
+3. `event: usage`: Reports token consumption: `data: {"tokensIn": 1250, "tokensOut": 180, "usedFreeBudget": true}`.
+4. `event: done`: Signals the end of the streaming session: `data: {}`.
+5. `event: error`: Emitted if an unhandled exception or abort occurs during generation: `data: {"code": "PROVIDER_ERROR", "message": "..."}`.
+
+Citation Standards:
+- In-text markers use numbered square brackets `[1]`, `[2]`.
+- Clicking a citation marker in the web interface expands the dedicated right-hand Source Panel displaying document title, verified page number, and the highlighted text excerpt.
+- Ingestion Summaries: Each ingested document generates a structured summary with an overview, 5 to 10 key points, and outline sections. Summaries do not consume the user's free token allowance.

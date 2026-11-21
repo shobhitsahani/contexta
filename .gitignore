@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.next/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+*.err
+*.out
+.DS_Store
+.vitest/
+.turbo/
+.opencode/
+eval/private/

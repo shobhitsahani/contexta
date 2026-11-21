@@ -1,0 +1,646 @@
+[
+  {
+    "id": "ml-01",
+    "doc": "ml-primer",
+    "type": "answerable",
+    "question": "What is the primary focus of machine learning according to statistical learning theory?",
+    "expectedSubstring": "focused on mathematical algorithms that iteratively improve performance on specific tasks through empirical data",
+    "expectedPage": 1,
+    "referenceAnswer": "Machine learning focuses on mathematical algorithms that iteratively improve task performance through empirical data observation rather than executing hard-coded rules."
+  },
+  {
+    "id": "ml-02",
+    "doc": "ml-primer",
+    "type": "answerable",
+    "question": "Why do learning algorithms minimize empirical risk instead of expected risk?",
+    "expectedSubstring": "Because the true joint probability distribution is unknown, learning algorithms minimize empirical risk across observed training samples.",
+    "expectedPage": 1,
+    "referenceAnswer": "Because the true joint probability distribution of the data is unknown, algorithms minimize empirical risk over observed training samples."
+  },
+  {
+    "id": "ml-03",
+    "doc": "ml-primer",
+    "type": "answerable",
+    "question": "What is the difference between parametric and non-parametric models?",
+    "expectedSubstring": "Parametric models assume a finite, fixed set of parameters independent of training sample size",
+    "expectedPage": 1,
+    "referenceAnswer": "Parametric models assume a fixed set of parameters independent of data size (e.g., linear regression), whereas non-parametric models scale parameter capacity with data volume (e.g., k-nearest neighbors)."
+  },
+  {
+    "id": "ml-04",
+    "doc": "ml-primer",
+    "type": "answerable",
+    "question": "What types of tasks belong to supervised learning?",
+    "expectedSubstring": "Regression tasks predict continuous numerical quantities",
+    "expectedPage": 2,
+    "referenceAnswer": "Supervised learning comprises regression tasks predicting continuous quantities and classification tasks predicting discrete categorical labels from paired input-target examples."
+  },
+  {
+    "id": "ml-05",
+    "doc": "ml-primer",
+    "type": "answerable",
+    "question": "What are common methodologies used in unsupervised learning?",
+    "expectedSubstring": "k-means clustering, hierarchical clustering, principal component analysis (PCA), and t-distributed stochastic neighbor embedding",
+    "expectedPage": 2,
+    "referenceAnswer": "Common unsupervised learning methodologies include k-means clustering, hierarchical clustering, principal component analysis (PCA), and t-SNE."
+  },
+  {
+    "id": "ml-06",
+    "doc": "ml-primer",
+    "type": "answerable",
+    "question": "What role do activation functions play in deep neural networks?",
+    "expectedSubstring": "introduce non-linearities necessary to approximate complex functions",
+    "expectedPage": 2,
+    "referenceAnswer": "Activation functions such as ReLU, GELU, and sigmoid introduce non-linearities that enable deep neural networks to approximate complex non-linear functions."
+  },
+  {
+    "id": "ml-07",
+    "doc": "ml-primer",
+    "type": "answerable",
+    "question": "What is overfitting and how does an overfitted model behave on validation data?",
+    "expectedSubstring": "overfitting, wherein a model memorizes stochastic noise and idiosyncrasies of training samples",
+    "expectedPage": 3,
+    "referenceAnswer": "Overfitting occurs when a model memorizes noise and sample quirks instead of underlying patterns, resulting in low training loss but poor generalization error on validation data."
+  },
+  {
+    "id": "ml-08",
+    "doc": "ml-primer",
+    "type": "answerable",
+    "question": "Which optimization algorithms and loss functions are standard for classification?",
+    "expectedSubstring": "categorical cross-entropy for classification",
+    "expectedPage": 3,
+    "referenceAnswer": "Classification commonly uses categorical cross-entropy loss with stochastic gradient descent (SGD) or adaptive optimizers like Adam and AdamW via backpropagation."
+  },
+  {
+    "id": "ml-09",
+    "doc": "ml-primer",
+    "type": "answerable",
+    "question": "How does Retrieval-Augmented Generation (RAG) reduce hallucinations?",
+    "expectedSubstring": "retrieves external contextual passages relevant to a user query and injects them into the prompt context window",
+    "expectedPage": 4,
+    "referenceAnswer": "RAG retrieves external contextual passages relevant to the query and injects them into the prompt window, grounding answers in verifiable facts and reducing hallucination."
+  },
+  {
+    "id": "ml-10",
+    "doc": "ml-primer",
+    "type": "answerable",
+    "question": "What is the F1-score and when is it most valuable?",
+    "expectedSubstring": "the harmonic mean of precision and recall, balancing trade-offs in imbalanced distributions",
+    "expectedPage": 4,
+    "referenceAnswer": "F1-score is the harmonic mean of precision and recall, balancing both metrics particularly in imbalanced class distributions."
+  },
+  {
+    "id": "ml-11",
+    "doc": "ml-primer",
+    "type": "unanswerable",
+    "question": "How does Contexta use quantum entanglement to accelerate gradient descent?",
+    "expectedSubstring": null,
+    "expectedPage": null,
+    "referenceAnswer": "I couldn't find this information in your documents."
+  },
+  {
+    "id": "ml-12",
+    "doc": "ml-primer",
+    "type": "unanswerable",
+    "question": "What was the closing price of Apple stock on November 20, 2026?",
+    "expectedSubstring": null,
+    "expectedPage": null,
+    "referenceAnswer": "I couldn't find this information in your documents."
+  },
+  {
+    "id": "ml-13",
+    "doc": "ml-primer",
+    "type": "unanswerable",
+    "question": "Which Transformer self-attention architecture was invented in 1952?",
+    "expectedSubstring": null,
+    "expectedPage": null,
+    "referenceAnswer": "I couldn't find this information in your documents."
+  },
+  {
+    "id": "ml-14",
+    "doc": "ml-primer",
+    "type": "multi-part",
+    "question": "What metrics are derived from a confusion matrix, and how is precision distinguished from recall?",
+    "expectedSubstring": "ratio of true positive predictions to total predicted positives",
+    "expectedPage": 4,
+    "referenceAnswer": "A confusion matrix derives accuracy, precision, recall, and F1-score. Precision is the ratio of true positives to total predicted positives, while recall is the ratio of true positives to all actual positive instances."
+  },
+  {
+    "id": "ml-15",
+    "doc": "ml-primer",
+    "type": "multi-part",
+    "question": "What are two distinct regularization methods to mitigate overfitting, and what do they penalize or disable?",
+    "expectedSubstring": "L1 and L2 weight regularization (penalizing model parameter magnitudes)",
+    "expectedPage": 3,
+    "referenceAnswer": "L1/L2 regularization penalizes parameter magnitudes in the loss function, while dropout stochastically disables a fraction of neuron activations during forward passes."
+  },
+  {
+    "id": "ml-16",
+    "doc": "ml-primer",
+    "type": "follow-up",
+    "question": "What about deep learning hidden layers?",
+    "expectedSubstring": "Deep neural networks incorporate multiple hidden layers between input and output layers, facilitating automatic extraction of hierarchical feature representations",
+    "expectedPage": 2,
+    "referenceAnswer": "Deep neural networks use multiple hidden layers between input and output to automatically extract hierarchical feature representations.",
+    "history": [
+      { "role": "user", "content": "How do artificial neural networks structure their connections?" },
+      { "role": "assistant", "content": "Neural networks consist of sequential layers of interconnected mathematical nodes with scalar weights that modulate signals." }
+    ]
+  },
+  {
+    "id": "ml-17",
+    "doc": "ml-primer",
+    "type": "follow-up",
+    "question": "What techniques prevent it?",
+    "expectedSubstring": "Mitigation strategies for overfitting include",
+    "expectedPage": 3,
+    "referenceAnswer": "Techniques to prevent overfitting include L1/L2 regularization, dropout, early stopping, data augmentation, and k-fold cross-validation.",
+    "history": [
+      { "role": "user", "content": "What is overfitting in statistical learning?" },
+      { "role": "assistant", "content": "Overfitting is when a model memorizes noise and idiosyncrasies in training samples rather than underlying patterns." }
+    ]
+  },
+  {
+    "id": "sec-01",
+    "doc": "privacy-security-policy",
+    "type": "answerable",
+    "question": "Where and how are original user-uploaded documents stored in Contexta?",
+    "expectedSubstring": "Uploaded document binaries (PDF, DOCX, TXT) are transferred directly into secure private object storage (Cloudflare R2 or Supabase Storage)",
+    "expectedPage": 1,
+    "referenceAnswer": "Original document binaries are stored in secure private object storage (Cloudflare R2 or Supabase Storage) under random UUID keys without public read permissions."
+  },
+  {
+    "id": "sec-02",
+    "doc": "privacy-security-policy",
+    "type": "answerable",
+    "question": "Which cryptographic algorithm protects user-provided LLM API keys at rest?",
+    "expectedSubstring": "encrypted at rest using authenticated symmetric AES-256-GCM",
+    "expectedPage": 1,
+    "referenceAnswer": "User-provided LLM API keys are encrypted at rest using authenticated symmetric AES-256-GCM."
+  },
+  {
+    "id": "sec-03",
+    "doc": "privacy-security-policy",
+    "type": "answerable",
+    "question": "Are plaintext provider keys ever logged or returned in HTTP API responses?",
+    "expectedSubstring": "Plaintext keys are never written to disk, never printed in application logs, and never returned over HTTP API responses.",
+    "expectedPage": 1,
+    "referenceAnswer": "No. Plaintext keys are never written to disk, never printed in logs, and never returned over HTTP API responses."
+  },
+  {
+    "id": "sec-04",
+    "doc": "privacy-security-policy",
+    "type": "answerable",
+    "question": "What happens to chunk embeddings when a user deletes a document?",
+    "expectedSubstring": "All associated chunks and vector embeddings in pgvector are purged immediately via foreign key cascade",
+    "expectedPage": 2,
+    "referenceAnswer": "All associated chunks and vector embeddings in pgvector are purged immediately via foreign key cascade (ON DELETE CASCADE)."
+  },
+  {
+    "id": "sec-05",
+    "doc": "privacy-security-policy",
+    "type": "answerable",
+    "question": "How quickly are all records purged upon account termination, and are shadow copies kept?",
+    "expectedSubstring": "irreversibly deleted from production storage within 60 seconds. Contexta does not maintain soft-deleted shadow copies.",
+    "expectedPage": 2,
+    "referenceAnswer": "All user data, documents, vectors, keys, and chats are irreversibly purged within 60 seconds upon account termination, with no shadow copies kept."
+  },
+  {
+    "id": "sec-06",
+    "doc": "privacy-security-policy",
+    "type": "answerable",
+    "question": "What is the privacy difference between the free tier and Bring Your Own Key (BYOK)?",
+    "expectedSubstring": "Under Google's free-tier terms of service, submitted prompt content and retrieved chunks may be processed and reviewed to improve model algorithms.",
+    "expectedPage": 3,
+    "referenceAnswer": "On the free tier, submitted content may be processed by Google to improve its models. Under BYOK, generation calls route directly to the user's provider under commercial terms where data is not used for model training."
+  },
+  {
+    "id": "sec-07",
+    "doc": "privacy-security-policy",
+    "type": "answerable",
+    "question": "What embedding model is used when a user enables BYOK for chat?",
+    "expectedSubstring": "Ingestion embeddings continue using the platform's standardized 768-dimension embedding model to preserve vector index consistency.",
+    "expectedPage": 3,
+    "referenceAnswer": "Ingestion continues using the standardized 768-dimension embedding model to ensure vector index consistency across the platform."
+  },
+  {
+    "id": "sec-08",
+    "doc": "privacy-security-policy",
+    "type": "answerable",
+    "question": "What occurs when a user revokes privacy consent in account settings?",
+    "expectedSubstring": "Revocation instantly blocks subsequent document uploads and freezes free-tier AI chat generation until re-consent is granted.",
+    "expectedPage": 4,
+    "referenceAnswer": "Revoking consent immediately blocks subsequent file uploads and pauses free-tier AI chat generation until re-consent is provided."
+  },
+  {
+    "id": "sec-09",
+    "doc": "privacy-security-policy",
+    "type": "answerable",
+    "question": "Within what timeframe must Contexta notify users if a verified security incident occurs?",
+    "expectedSubstring": "registered users will receive electronic notification within 72 hours of incident verification.",
+    "expectedPage": 4,
+    "referenceAnswer": "Users will receive electronic notification within 72 hours of incident verification."
+  },
+  {
+    "id": "sec-10",
+    "doc": "privacy-security-policy",
+    "type": "answerable",
+    "question": "Does Contexta permit third-party advertising trackers in the application?",
+    "expectedSubstring": "does not sell behavioral analytics, and does not permit third-party advertising trackers in the application.",
+    "expectedPage": 4,
+    "referenceAnswer": "No, Contexta does not sell behavioral data and strictly forbids third-party advertising trackers."
+  },
+  {
+    "id": "sec-11",
+    "doc": "privacy-security-policy",
+    "type": "unanswerable",
+    "question": "What is Contexta's official HIPAA Business Associate Agreement (BAA) registration number?",
+    "expectedSubstring": null,
+    "expectedPage": null,
+    "referenceAnswer": "I couldn't find this information in your documents."
+  },
+  {
+    "id": "sec-12",
+    "doc": "privacy-security-policy",
+    "type": "unanswerable",
+    "question": "How much revenue does Contexta share with ad-targeting brokers?",
+    "expectedSubstring": null,
+    "expectedPage": null,
+    "referenceAnswer": "I couldn't find this information in your documents."
+  },
+  {
+    "id": "sec-13",
+    "doc": "privacy-security-policy",
+    "type": "unanswerable",
+    "question": "What biometric facial recognition scans are stored on user signup?",
+    "expectedSubstring": null,
+    "expectedPage": null,
+    "referenceAnswer": "I couldn't find this information in your documents."
+  },
+  {
+    "id": "sec-14",
+    "doc": "privacy-security-policy",
+    "type": "multi-part",
+    "question": "What happens to historic chat transcripts when an underlying document is deleted, and how are citation links modified?",
+    "expectedSubstring": "Historic chat messages referencing the deleted document retain their text transcript, but citation source links are permanently flagged as \"document deleted\".",
+    "expectedPage": 2,
+    "referenceAnswer": "Historic chat messages retain their textual transcript, but citation source links are permanently flagged as 'document deleted'."
+  },
+  {
+    "id": "sec-15",
+    "doc": "privacy-security-policy",
+    "type": "multi-part",
+    "question": "What two fields are recorded in the database when a user gives pre-upload privacy consent?",
+    "expectedSubstring": "The consent event records privacy_consent_at timestamp and privacy_version in the database.",
+    "expectedPage": 4,
+    "referenceAnswer": "Pre-upload privacy consent records the privacy_consent_at timestamp and the privacy_version in the database."
+  },
+  {
+    "id": "sec-16",
+    "doc": "privacy-security-policy",
+    "type": "follow-up",
+    "question": "What happens to the key during requests?",
+    "expectedSubstring": "Provider keys are decrypted strictly in volatile application memory for the duration of the outbound HTTPS request.",
+    "expectedPage": 3,
+    "referenceAnswer": "Provider keys are decrypted strictly in volatile application memory for the duration of the outbound HTTPS request and are never written to disk.",
+    "history": [
+      { "role": "user", "content": "How does Contexta handle BYOK user credentials?" },
+      { "role": "assistant", "content": "User-supplied BYOK API keys are stored encrypted at rest using AES-256-GCM and bound to the user id and provider." }
+    ]
+  },
+  {
+    "id": "sec-17",
+    "doc": "privacy-security-policy",
+    "type": "follow-up",
+    "question": "Can users withdraw it?",
+    "expectedSubstring": "A user may revoke their privacy consent at any point in account settings. Revocation instantly blocks subsequent document uploads",
+    "expectedPage": 4,
+    "referenceAnswer": "Yes, users can revoke privacy consent at any time in settings, which immediately blocks further uploads and freezes free-tier AI chat.",
+    "history": [
+      { "role": "user", "content": "Is consent required before uploading files to Contexta?" },
+      { "role": "assistant", "content": "Yes, affirmative privacy consent is mandatory before the first file upload." }
+    ]
+  },
+  {
+    "id": "ops-01",
+    "doc": "operations-manual",
+    "type": "answerable",
+    "question": "How long does Render free instance stay idle before sleeping, and what is its cold-start latency?",
+    "expectedSubstring": "sleep mode after 15 minutes of inbound inactivity. A cold start requires 30 to 50 seconds to resume listening.",
+    "expectedPage": 1,
+    "referenceAnswer": "The API enters sleep mode after 15 minutes of inactivity, requiring a 30 to 50 second cold start to resume listening."
+  },
+  {
+    "id": "ops-02",
+    "doc": "operations-manual",
+    "type": "answerable",
+    "question": "What visual indication is presented to the user during an API cold start?",
+    "expectedSubstring": "renders a \"Waking up the server...\" visual indicator until /health returns HTTP 200.",
+    "expectedPage": 1,
+    "referenceAnswer": "The web client displays a 'Waking up the server...' visual indicator while pinging /health with exponential backoff."
+  },
+  {
+    "id": "ops-03",
+    "doc": "operations-manual",
+    "type": "answerable",
+    "question": "What format requirements are enforced for KEY_ENCRYPTION_SECRET?",
+    "expectedSubstring": "A 32-byte cryptographic master key encoded as 64 hexadecimal characters or 44 base64 characters.",
+    "expectedPage": 2,
+    "referenceAnswer": "KEY_ENCRYPTION_SECRET must be exactly 32 bytes encoded as 64 hex characters or 44 base64 characters."
+  },
+  {
+    "id": "ops-04",
+    "doc": "operations-manual",
+    "type": "answerable",
+    "question": "What CLI command executes database migrations before deploying new API code?",
+    "expectedSubstring": "pnpm --filter @contexta/api db:migrate",
+    "expectedPage": 2,
+    "referenceAnswer": "Run `pnpm --filter @contexta/api db:migrate` prior to deployment."
+  },
+  {
+    "id": "ops-05",
+    "doc": "operations-manual",
+    "type": "answerable",
+    "question": "How does the ingestion queue claim jobs without concurrency conflicts?",
+    "expectedSubstring": "SELECT id, document_id FROM jobs WHERE status = 'queued' AND run_at <= NOW() ORDER BY run_at ASC LIMIT 1 FOR UPDATE SKIP LOCKED;",
+    "expectedPage": 3,
+    "referenceAnswer": "Workers claim ready jobs atomically using `SELECT ... FOR UPDATE SKIP LOCKED` ordered by run_at."
+  },
+  {
+    "id": "ops-06",
+    "doc": "operations-manual",
+    "type": "answerable",
+    "question": "What is the exponential backoff calculation for transient ingestion errors?",
+    "expectedSubstring": "run_at = NOW() + (2 ^ attempts * 10 seconds)",
+    "expectedPage": 3,
+    "referenceAnswer": "Transient errors re-queue the job with `run_at = NOW() + (2 ^ attempts * 10 seconds)`."
+  },
+  {
+    "id": "ops-07",
+    "doc": "operations-manual",
+    "type": "answerable",
+    "question": "What watchdog threshold reclaims abandoned processing jobs?",
+    "expectedSubstring": "processing status where locked_at < NOW() - INTERVAL '5 minutes'",
+    "expectedPage": 3,
+    "referenceAnswer": "A watchdog reclaims jobs stuck in 'processing' status with locked_at older than 5 minutes, resetting them to 'queued'."
+  },
+  {
+    "id": "ops-08",
+    "doc": "operations-manual",
+    "type": "answerable",
+    "question": "What does GET /health return when database or cache is degraded?",
+    "expectedSubstring": "HTTP 503 {\"status\": \"degraded\", \"error\": \"...\"}: Persistence or cache unreachable.",
+    "expectedPage": 4,
+    "referenceAnswer": "It returns HTTP 503 with status 'degraded' when persistence or cache is unreachable."
+  },
+  {
+    "id": "ops-09",
+    "doc": "operations-manual",
+    "type": "answerable",
+    "question": "Why can 100-page complex PDF ingestion trigger Out Of Memory (OOM) on Render?",
+    "expectedSubstring": "Parsing 100-page complex PDFs in Node.js can spike memory above the 512 MB host limit.",
+    "expectedPage": 4,
+    "referenceAnswer": "Parsing complex 100-page PDFs in Node.js can spike memory usage beyond the 512 MB memory limit of the Render free host."
+  },
+  {
+    "id": "ops-10",
+    "doc": "operations-manual",
+    "type": "answerable",
+    "question": "What is the quota limit for the Gemini Embedding API on the free tier?",
+    "expectedSubstring": "exceeds the 30,000 tokens/min free quota.",
+    "expectedPage": 4,
+    "referenceAnswer": "The Gemini Embedding free tier has a quota limit of approximately 30,000 tokens per minute."
+  },
+  {
+    "id": "ops-11",
+    "doc": "operations-manual",
+    "type": "unanswerable",
+    "question": "How do you configure Kubernetes pod autoscalers for GPU worker nodes on EKS?",
+    "expectedSubstring": null,
+    "expectedPage": null,
+    "referenceAnswer": "I couldn't find this information in your documents."
+  },
+  {
+    "id": "ops-12",
+    "doc": "operations-manual",
+    "type": "unanswerable",
+    "question": "What Jenkins CI/CD pipeline script deploys Contexta to Azure Container Instances?",
+    "expectedSubstring": null,
+    "expectedPage": null,
+    "referenceAnswer": "I couldn't find this information in your documents."
+  },
+  {
+    "id": "ops-13",
+    "doc": "operations-manual",
+    "type": "unanswerable",
+    "question": "How do you configure Cassandra multi-datacenter cross-region replication for chat logs?",
+    "expectedSubstring": null,
+    "expectedPage": null,
+    "referenceAnswer": "I couldn't find this information in your documents."
+  },
+  {
+    "id": "ops-14",
+    "doc": "operations-manual",
+    "type": "multi-part",
+    "question": "How are transient errors distinguished from fatal errors in the background queue?",
+    "expectedSubstring": "Fatal Errors: Scanned PDFs, corrupted archives, or invalid file payloads immediately transition to status = 'failed' without burning retry attempts.",
+    "expectedPage": 3,
+    "referenceAnswer": "Transient errors (like network glitches or 429 rate limits) re-queue with exponential backoff up to max attempts, whereas fatal errors (like scanned PDFs or corrupt files) transition immediately to 'failed' without retrying."
+  },
+  {
+    "id": "ops-15",
+    "doc": "operations-manual",
+    "type": "multi-part",
+    "question": "What technologies power Contexta's frontend, API, vector database, and cache?",
+    "expectedSubstring": "Next.js (App Router) deployed as a static/edge-rendered application on Vercel",
+    "expectedPage": 1,
+    "referenceAnswer": "Frontend is Next.js on Vercel, API is Express Node.js on Render, vector database is PostgreSQL with pgvector on Supabase/Neon, and cache is Upstash Redis."
+  },
+  {
+    "id": "ops-16",
+    "doc": "operations-manual",
+    "type": "follow-up",
+    "question": "What happens if a worker crashes?",
+    "expectedSubstring": "The watchdog reclaims the job to status = 'queued' and resets locked_at.",
+    "expectedPage": 3,
+    "referenceAnswer": "If a worker crashes, the watchdog detects the job in 'processing' status with locked_at older than 5 minutes and resets it to 'queued' so it can resume.",
+    "history": [
+      { "role": "user", "content": "How does the ingestion queue assign work to workers?" },
+      { "role": "assistant", "content": "Workers atomically claim jobs using SELECT FOR UPDATE SKIP LOCKED and transition them to processing status." }
+    ]
+  },
+  {
+    "id": "ops-17",
+    "doc": "operations-manual",
+    "type": "follow-up",
+    "question": "How does the UI handle it?",
+    "expectedSubstring": "implements an exponential backoff ping mechanism and renders a \"Waking up the server...\" visual indicator",
+    "expectedPage": 1,
+    "referenceAnswer": "The UI pings /health with exponential backoff and shows a 'Waking up the server...' banner until HTTP 200 is received.",
+    "history": [
+      { "role": "user", "content": "Does Render free tier suffer from cold starts?" },
+      { "role": "assistant", "content": "Yes, Render free tier sleeps after 15 minutes of inactivity, resulting in a 30 to 50 second cold start." }
+    ]
+  },
+  {
+    "id": "prod-01",
+    "doc": "product-specification",
+    "type": "answerable",
+    "question": "What is the free token budget allocated to each verified Contexta user?",
+    "expectedSubstring": "baseline allowance of 50,000 free tokens (covering approximately 10 comprehensive Q&A turns",
+    "expectedPage": 1,
+    "referenceAnswer": "Each verified user receives a baseline allowance of 50,000 free tokens."
+  },
+  {
+    "id": "prod-02",
+    "doc": "product-specification",
+    "type": "answerable",
+    "question": "Which models power free-tier chat generation and dense vector retrieval?",
+    "expectedSubstring": "Google Gemini Flash for answer generation and gemini-embedding-001 (dimension 768) for dense vector search.",
+    "expectedPage": 1,
+    "referenceAnswer": "The free tier uses Google Gemini Flash for chat answer generation and gemini-embedding-001 at dimension 768 for vector search."
+  },
+  {
+    "id": "prod-03",
+    "doc": "product-specification",
+    "type": "answerable",
+    "question": "What happens when the platform-wide daily ceiling on the server Gemini key is reached?",
+    "expectedSubstring": "free questions pause with a friendly notification, while BYOK users remain unaffected.",
+    "expectedPage": 1,
+    "referenceAnswer": "Free tier questions pause with a friendly notification, while BYOK users continue operating without interruption."
+  },
+  {
+    "id": "prod-04",
+    "doc": "product-specification",
+    "type": "answerable",
+    "question": "What file formats are supported for upload in Contexta v1?",
+    "expectedSubstring": "Supported File Types in v1: 1. Portable Document Format (PDF) 2. Microsoft Word (DOCX) 3. Plain Text (TXT)",
+    "expectedPage": 2,
+    "referenceAnswer": "Contexta v1 supports Portable Document Format (PDF), Microsoft Word (DOCX), and Plain Text (TXT)."
+  },
+  {
+    "id": "prod-05",
+    "doc": "product-specification",
+    "type": "answerable",
+    "question": "What are the maximum file size and page count limits for uploaded documents?",
+    "expectedSubstring": "Maximum File Size: 10 Megabytes (10,485,760 bytes). Uploads exceeding this threshold are rejected at the edge with HTTP 413 FILE_TOO_LARGE. Maximum Page Count: 100 pages",
+    "expectedPage": 2,
+    "referenceAnswer": "The maximum file size is 10 MB (rejected with HTTP 413 FILE_TOO_LARGE) and the maximum page count is 100 pages."
+  },
+  {
+    "id": "prod-06",
+    "doc": "product-specification",
+    "type": "answerable",
+    "question": "What criteria trigger rejection of a scanned PDF?",
+    "expectedSubstring": "fewer than 50 extracted characters across 5 or more pages are classified as non-text scanned PDFs. Ingestion terminates immediately with status failed and message \"Scanned PDF not supported yet (requires OCR)\"",
+    "expectedPage": 2,
+    "referenceAnswer": "Extracting fewer than 50 characters across 5 or more pages triggers rejection with status 'failed' and message 'Scanned PDF not supported yet (requires OCR)'."
+  },
+  {
+    "id": "prod-07",
+    "doc": "product-specification",
+    "type": "answerable",
+    "question": "What target chunk size and overlap token counts are used during text chunking?",
+    "expectedSubstring": "Target Chunk Size: ~600 tokens (~2,400 characters). Overlap Size: ~80 tokens (~320 characters).",
+    "expectedPage": 2,
+    "referenceAnswer": "The target chunk size is approximately 600 tokens (~2,400 characters) with an overlap of approximately 80 tokens (~320 characters)."
+  },
+  {
+    "id": "prod-08",
+    "doc": "product-specification",
+    "type": "answerable",
+    "question": "What similarity metric and index type are configured in pgvector?",
+    "expectedSubstring": "Cosine distance (<=> operator in pgvector). Index Type: Hierarchical Navigable Small World (HNSW) index",
+    "expectedPage": 3,
+    "referenceAnswer": "pgvector uses Cosine distance (<=>) with a Hierarchical Navigable Small World (HNSW) index."
+  },
+  {
+    "id": "prod-09",
+    "doc": "product-specification",
+    "type": "answerable",
+    "question": "How does Reciprocal Rank Fusion (RRF) calculate compound scores for hybrid search?",
+    "expectedSubstring": "RRF_Score(doc) = (1 / (60 + Rank_Vector)) + (1 / (60 + Rank_Keyword))",
+    "expectedPage": 3,
+    "referenceAnswer": "RRF computes RRF_Score(doc) = (1 / (60 + Rank_Vector)) + (1 / (60 + Rank_Keyword)), boosting items appearing in both rankings."
+  },
+  {
+    "id": "prod-10",
+    "doc": "product-specification",
+    "type": "answerable",
+    "question": "What events are emitted over Server-Sent Events (SSE) during a chat response?",
+    "expectedSubstring": "event: delta event: sources event: usage event: done event: error",
+    "expectedPage": 4,
+    "referenceAnswer": "The SSE protocol emits delta (text fragments), sources (citations), usage (token counts), done (completion), and optionally error."
+  },
+  {
+    "id": "prod-11",
+    "doc": "product-specification",
+    "type": "unanswerable",
+    "question": "How do you upload MP4 video files for automatic timestamp transcription?",
+    "expectedSubstring": null,
+    "expectedPage": null,
+    "referenceAnswer": "I couldn't find this information in your documents."
+  },
+  {
+    "id": "prod-12",
+    "doc": "product-specification",
+    "type": "unanswerable",
+    "question": "How do team workspaces share multi-user billing accounts in v1?",
+    "expectedSubstring": null,
+    "expectedPage": null,
+    "referenceAnswer": "I couldn't find this information in your documents."
+  },
+  {
+    "id": "prod-13",
+    "doc": "product-specification",
+    "type": "unanswerable",
+    "question": "What SAML 2.0 Okta SSO configurations are available in Contexta settings?",
+    "expectedSubstring": null,
+    "expectedPage": null,
+    "referenceAnswer": "I couldn't find this information in your documents."
+  },
+  {
+    "id": "prod-14",
+    "doc": "product-specification",
+    "type": "multi-part",
+    "question": "What are the storage limit on active documents per free user, and what model does BYOK require for embeddings?",
+    "expectedSubstring": "Maximum User Storage: 5 active documents per free-tier user account.",
+    "expectedPage": 2,
+    "referenceAnswer": "Free tier users are limited to 5 active documents, and BYOK continues using the fixed 768-dimensional gemini-embedding-001 model for embeddings."
+  },
+  {
+    "id": "prod-15",
+    "doc": "product-specification",
+    "type": "multi-part",
+    "question": "How does the UI render citation markers in text, and what opens when a user clicks a citation?",
+    "expectedSubstring": "Clicking a citation marker in the web interface expands the dedicated right-hand Source Panel displaying document title, verified page number, and the highlighted text excerpt.",
+    "expectedPage": 4,
+    "referenceAnswer": "Citations are rendered as numbered markers like [1]. Clicking expands the right-hand Source Panel showing document name, verified page number, and the highlighted snippet."
+  },
+  {
+    "id": "prod-16",
+    "doc": "product-specification",
+    "type": "follow-up",
+    "question": "What fields are in the sources event?",
+    "expectedSubstring": "data: {\"sources\": [{\"n\": 1, \"documentId\": \"uuid\", \"fileName\": \"manual.pdf\", \"page\": 3, \"snippet\": \"...\"}]}",
+    "expectedPage": 4,
+    "referenceAnswer": "Each source citation contains n (marker number), documentId, fileName, page number, and text snippet.",
+    "history": [
+      { "role": "user", "content": "How are citations delivered over the chat stream?" },
+      { "role": "assistant", "content": "Citations are delivered immediately after text generation in the sources event as a structured JSON array." }
+    ]
+  },
+  {
+    "id": "prod-17",
+    "doc": "product-specification",
+    "type": "follow-up",
+    "question": "What happens when clicked?",
+    "expectedSubstring": "expands the dedicated right-hand Source Panel displaying document title, verified page number, and the highlighted text excerpt",
+    "expectedPage": 4,
+    "referenceAnswer": "Clicking a citation marker expands the dedicated Source Panel displaying the document name, page, and snippet.",
+    "history": [
+      { "role": "user", "content": "How are citations formatted in assistant responses?" },
+      { "role": "assistant", "content": "Citations are formatted as numbered bracket markers like [1] or [2] inside the text." }
+    ]
+  }
+]
